@@ -1,0 +1,193 @@
+`timescale 1ns/1ns
+module Shifter( dataIn, shamt, dataOut, reset, signal );
+
+
+  input [31:0] dataIn;
+  input reset;     
+  input [31:0] shamt;    
+  input [5:0] signal;
+  output [31:0] dataOut; 
+  wire [31:0] line1, line2, line3, line4, line5; 
+ 
+  parameter AND = 6'b100100;
+  parameter OR  = 6'b100101;
+  parameter ADD = 6'b100000;
+  parameter SUB = 6'b100010;
+  parameter SLT = 6'b101010;
+  parameter MULTU = 6'b011001; 
+  parameter SRL = 6'b0000010; 
+
+
+  // Shift magnitude = 0 
+  mux2_1 m0(dataIn[0], dataIn[1], shamt[0], line1[0]); 
+  mux2_1 m1(dataIn[1], dataIn[2], shamt[0], line1[1]);
+  mux2_1 m2(dataIn[2], dataIn[3], shamt[0], line1[2]);
+  mux2_1 m3(dataIn[3], dataIn[4], shamt[0], line1[3]);
+  mux2_1 m4(dataIn[4], dataIn[5], shamt[0], line1[4]);
+  mux2_1 m5(dataIn[5], dataIn[6], shamt[0], line1[5]);
+  mux2_1 m6(dataIn[6], dataIn[7], shamt[0], line1[6]);
+  mux2_1 m7(dataIn[7], dataIn[8], shamt[0], line1[7]);
+  mux2_1 m8(dataIn[8], dataIn[9], shamt[0], line1[8]);
+  mux2_1 m9(dataIn[9], dataIn[10], shamt[0], line1[9]);
+  mux2_1 m10(dataIn[10], dataIn[11], shamt[0], line1[10]);
+  mux2_1 m11(dataIn[11], dataIn[12], shamt[0], line1[11]);
+  mux2_1 m12(dataIn[12], dataIn[13], shamt[0], line1[12]);
+  mux2_1 m13(dataIn[13], dataIn[14], shamt[0], line1[13]);
+  mux2_1 m14(dataIn[14], dataIn[15], shamt[0], line1[14]);
+  mux2_1 m15(dataIn[15], dataIn[16], shamt[0], line1[15]);
+  mux2_1 m16(dataIn[16], dataIn[17], shamt[0], line1[16]);
+  mux2_1 m17(dataIn[17], dataIn[18], shamt[0], line1[17]);
+  mux2_1 m18(dataIn[18], dataIn[19], shamt[0], line1[18]);
+  mux2_1 m19(dataIn[19], dataIn[20], shamt[0], line1[19]);
+  mux2_1 m20(dataIn[20], dataIn[21], shamt[0], line1[20]);
+  mux2_1 m21(dataIn[21], dataIn[22], shamt[0], line1[21]);
+  mux2_1 m22(dataIn[22], dataIn[23], shamt[0], line1[22]);
+  mux2_1 m23(dataIn[23], dataIn[24], shamt[0], line1[23]);
+  mux2_1 m24(dataIn[24], dataIn[25], shamt[0], line1[24]);
+  mux2_1 m25(dataIn[25], dataIn[26], shamt[0], line1[25]);
+  mux2_1 m26(dataIn[26], dataIn[27], shamt[0], line1[26]);
+  mux2_1 m27(dataIn[27], dataIn[28], shamt[0], line1[27]);
+  mux2_1 m28(dataIn[28], dataIn[29], shamt[0], line1[28]);
+  mux2_1 m29(dataIn[29], dataIn[30], shamt[0], line1[29]);
+  mux2_1 m30(dataIn[30], dataIn[31], shamt[0], line1[30]);
+  mux2_1 m31(dataIn[31], 1'b0,       shamt[0], line1[31]);
+
+  // Shift magnitude = 2
+  mux2_1 m32(line1[0], line1[2], shamt[1], line2[0]); 
+  mux2_1 m33(line1[1], line1[3], shamt[1], line2[1]); 
+  mux2_1 m34(line1[2], line1[4], shamt[1], line2[2]); 
+  mux2_1 m35(line1[3], line1[5], shamt[1], line2[3]); 
+  mux2_1 m36(line1[4], line1[6], shamt[1], line2[4]); 
+  mux2_1 m37(line1[5], line1[7], shamt[1], line2[5]); 
+  mux2_1 m38(line1[6], line1[8], shamt[1], line2[6]); 
+  mux2_1 m39(line1[7], line1[9], shamt[1], line2[7]); 
+  mux2_1 m40(line1[8], line1[10], shamt[1], line2[8]); 
+  mux2_1 m41(line1[9], line1[11], shamt[1], line2[9]); 
+  mux2_1 m42(line1[10], line1[12], shamt[1], line2[10]);
+  mux2_1 m43(line1[11], line1[13], shamt[1], line2[11]); 
+  mux2_1 m44(line1[12], line1[14], shamt[1], line2[12]); 
+  mux2_1 m45(line1[13], line1[15], shamt[1], line2[13]); 
+  mux2_1 m46(line1[14], line1[16], shamt[1], line2[14]); 
+  mux2_1 m47(line1[15], line1[17], shamt[1], line2[15]); 
+  mux2_1 m48(line1[16], line1[18], shamt[1], line2[16]); 
+  mux2_1 m49(line1[17], line1[19], shamt[1], line2[17]); 
+  mux2_1 m50(line1[18], line1[20], shamt[1], line2[18]); 
+  mux2_1 m51(line1[19], line1[21], shamt[1], line2[19]); 
+  mux2_1 m52(line1[20], line1[22], shamt[1], line2[20]); 
+  mux2_1 m53(line1[21], line1[23], shamt[1], line2[21]); 
+  mux2_1 m54(line1[22], line1[24], shamt[1], line2[22]); 
+  mux2_1 m55(line1[23], line1[25], shamt[1], line2[23]); 
+  mux2_1 m56(line1[24], line1[26], shamt[1], line2[24]); 
+  mux2_1 m57(line1[25], line1[27], shamt[1], line2[25]); 
+  mux2_1 m58(line1[26], line1[28], shamt[1], line2[26]); 
+  mux2_1 m59(line1[27], line1[29], shamt[1], line2[27]); 
+  mux2_1 m60(line1[28], line1[30], shamt[1], line2[28]); 
+  mux2_1 m61(line1[29], line1[31], shamt[1], line2[29]); 
+  mux2_1 m62(line1[30], 1'b0, shamt[1], line2[30]); 
+  mux2_1 m63(line1[31], 1'b0, shamt[1], line2[31]);  
+
+  // Shift magnitude = 4
+  mux2_1 m64(line2[0], line2[4], shamt[2], line3[0]); 
+  mux2_1 m65(line2[1], line2[5], shamt[2], line3[1]); 
+  mux2_1 m66(line2[2], line2[6], shamt[2], line3[2]); 
+  mux2_1 m67(line2[3], line2[7], shamt[2], line3[3]); 
+  mux2_1 m68(line2[4], line2[8], shamt[2], line3[4]); 
+  mux2_1 m69(line2[5], line2[9], shamt[2], line3[5]); 
+  mux2_1 m70(line2[6], line2[10], shamt[2], line3[6]); 
+  mux2_1 m71(line2[7], line2[11], shamt[2], line3[7]); 
+  mux2_1 m72(line2[8], line2[12], shamt[2], line3[8]); 
+  mux2_1 m73(line2[9], line2[13], shamt[2], line3[9]); 
+  mux2_1 m74(line2[10], line2[14], shamt[2], line3[10]); 
+  mux2_1 m75(line2[11], line2[15], shamt[2], line3[11]); 
+  mux2_1 m76(line2[12], line2[16], shamt[2], line3[12]); 
+  mux2_1 m77(line2[13], line2[17], shamt[2], line3[13]); 
+  mux2_1 m78(line2[14], line2[18], shamt[2], line3[14]); 
+  mux2_1 m79(line2[15], line2[19], shamt[2], line3[15]); 
+  mux2_1 m80(line2[16], line2[20], shamt[2], line3[16]); 
+  mux2_1 m81(line2[17], line2[21], shamt[2], line3[17]); 
+  mux2_1 m82(line2[18], line2[22], shamt[2], line3[18]); 
+  mux2_1 m83(line2[19], line2[23], shamt[2], line3[19]); 
+  mux2_1 m84(line2[20], line2[24], shamt[2], line3[20]); 
+  mux2_1 m85(line2[21], line2[25], shamt[2], line3[21]); 
+  mux2_1 m86(line2[22], line2[26], shamt[2], line3[22]); 
+  mux2_1 m87(line2[23], line2[27], shamt[2], line3[23]); 
+  mux2_1 m88(line2[24], line2[28], shamt[2], line3[24]); 
+  mux2_1 m89(line2[25], line2[29], shamt[2], line3[25]); 
+  mux2_1 m90(line2[26], line2[30], shamt[2], line3[26]); 
+  mux2_1 m91(line2[27], line2[31], shamt[2], line3[27]); 
+  mux2_1 m92(line2[28], 1'b0, shamt[2], line3[28]); 
+  mux2_1 m93(line2[29], 1'b0, shamt[2], line3[29]); 
+  mux2_1 m94(line2[30], 1'b0, shamt[2], line3[30]); 
+  mux2_1 m95(line2[31], 1'b0, shamt[2], line3[31]);  
+
+  // Shift magnitude = 8
+  mux2_1 m96(line3[0], line3[8], shamt[3], line4[0]); 
+  mux2_1 m97(line3[1], line3[9], shamt[3], line4[1]); 
+  mux2_1 m98(line3[2], line3[10], shamt[3], line4[2]); 
+  mux2_1 m99(line3[3], line3[11], shamt[3], line4[3]); 
+  mux2_1 m100(line3[4], line3[12], shamt[3], line4[4]); 
+  mux2_1 m101(line3[5], line3[13], shamt[3], line4[5]); 
+  mux2_1 m102(line3[6], line3[14], shamt[3], line4[6]); 
+  mux2_1 m103(line3[7], line3[15], shamt[3], line4[7]); 
+  mux2_1 m104(line3[8], line3[16], shamt[3], line4[8]); 
+  mux2_1 m105(line3[9], line3[17], shamt[3], line4[9]); 
+  mux2_1 m106(line3[10], line3[18], shamt[3], line4[10]); 
+  mux2_1 m107(line3[11], line3[19], shamt[3], line4[11]); 
+  mux2_1 m108(line3[12], line3[20], shamt[3], line4[12]); 
+  mux2_1 m109(line3[13], line3[21], shamt[3], line4[13]); 
+  mux2_1 m110(line3[14], line3[22], shamt[3], line4[14]); 
+  mux2_1 m111(line3[15], line3[23], shamt[3], line4[15]); 
+  mux2_1 m112(line3[16], line3[24], shamt[3], line4[16]); 
+  mux2_1 m113(line3[17], line3[25], shamt[3], line4[17]); 
+  mux2_1 m114(line3[18], line3[26], shamt[3], line4[18]); 
+  mux2_1 m115(line3[19], line3[27], shamt[3], line4[19]); 
+  mux2_1 m116(line3[20], line3[28], shamt[3], line4[20]); 
+  mux2_1 m117(line3[21], line3[29], shamt[3], line4[21]); 
+  mux2_1 m118(line3[22], line3[30], shamt[3], line4[22]); 
+  mux2_1 m119(line3[23], line3[31], shamt[3], line4[23]); 
+  mux2_1 m120(line3[24], 1'b0, shamt[3], line4[24]); 
+  mux2_1 m121(line3[25], 1'b0, shamt[3], line4[25]); 
+  mux2_1 m122(line3[26], 1'b0, shamt[3], line4[26]); 
+  mux2_1 m123(line3[27], 1'b0, shamt[3], line4[27]); 
+  mux2_1 m124(line3[28], 1'b0, shamt[3], line4[28]); 
+  mux2_1 m125(line3[29], 1'b0, shamt[3], line4[29]); 
+  mux2_1 m126(line3[30], 1'b0, shamt[3], line4[30]); 
+  mux2_1 m127(line3[31], 1'b0, shamt[3], line4[31]);
+
+  // Shift magnitude = 16
+  mux2_1 m128(line4[0], line4[16], shamt[4], line5[0]); 
+  mux2_1 m129(line4[1], line4[17], shamt[4], line5[1]); 
+  mux2_1 m130(line4[2], line4[18], shamt[4], line5[2]); 
+  mux2_1 m131(line4[3], line4[19], shamt[4], line5[3]); 
+  mux2_1 m132(line4[4], line4[20], shamt[4], line5[4]); 
+  mux2_1 m133(line4[5], line4[21], shamt[4], line5[5]); 
+  mux2_1 m134(line4[6], line4[22], shamt[4], line5[6]); 
+  mux2_1 m135(line4[7], line4[23], shamt[4], line5[7]); 
+  mux2_1 m136(line4[8], line4[24], shamt[4], line5[8]); 
+  mux2_1 m137(line4[9], line4[25], shamt[4], line5[9]); 
+  mux2_1 m138(line4[10], line4[26], shamt[4], line5[10]); 
+  mux2_1 m139(line4[11], line4[27], shamt[4], line5[11]); 
+  mux2_1 m140(line4[12], line4[28], shamt[4], line5[12]); 
+  mux2_1 m141(line4[13], line4[29], shamt[4], line5[13]); 
+  mux2_1 m142(line4[14], line4[30], shamt[4], line5[14]); 
+  mux2_1 m143(line4[15], line4[31], shamt[4], line5[15]); 
+  mux2_1 m144(line4[16], 1'b0, shamt[4], line5[16]); 
+  mux2_1 m145(line4[17], 1'b0, shamt[4], line5[17]); 
+  mux2_1 m146(line4[18], 1'b0, shamt[4], line5[18]); 
+  mux2_1 m147(line4[19], 1'b0, shamt[4], line5[19]); 
+  mux2_1 m148(line4[20], 1'b0, shamt[4], line5[20]); 
+  mux2_1 m149(line4[21], 1'b0, shamt[4], line5[21]); 
+  mux2_1 m150(line4[22], 1'b0, shamt[4], line5[22]); 
+  mux2_1 m151(line4[23], 1'b0, shamt[4], line5[23]); 
+  mux2_1 m152(line4[24], 1'b0, shamt[4], line5[24]); 
+  mux2_1 m153(line4[25], 1'b0, shamt[4], line5[25]); 
+  mux2_1 m154(line4[26], 1'b0, shamt[4], line5[26]); 
+  mux2_1 m155(line4[27], 1'b0, shamt[4], line5[27]); 
+  mux2_1 m156(line4[28], 1'b0, shamt[4], line5[28]); 
+  mux2_1 m157(line4[29], 1'b0, shamt[4], line5[29]); 
+  mux2_1 m158(line4[30], 1'b0, shamt[4], line5[30]); 
+  mux2_1 m159(line4[31], 1'b0, shamt[4], line5[31]);
+
+  assign dataOut = ( reset == 1'b1 ) ? 0 : (signal == SRL ) ? line5 : dataIn; 
+
+endmodule
