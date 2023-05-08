@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
-module alu_1bit(in0, in1, cin, cout, out, signal, binvert, reset, less);
+module alu_1bit_set(in0, in1, cin, cout, out, signal, binvert, reset, less, set);
   input in0, in1, cin, binvert, reset, less; 
-  output cout, out; 
+  output cout, out, set; 
   input [5:0] signal;
   wire temp_cout, temp_out;   
   wire temp_and, temp_or;   
@@ -30,4 +30,5 @@ module alu_1bit(in0, in1, cin, cout, out, signal, binvert, reset, less);
   full_adder fa(.in0(in0), .in1(binvert ^ in1), .cin(cin), .out(temp_out), .cout(temp_cout) );        
   mux_4to1 m1(.AND_IN(temp_and), .OR_IN(temp_or), .OUT_IN(temp_out), .Signal(signal), .dataOut(out), .Reset(reset), .Less(less) );
   assign cout = (signal == SUB || signal == ADD ) ? temp_cout : (reset == 1'b1) ? 0 : 0; 
+  assign set = (out == 1'b1 ) ? 1'b1 : 1'b0; // result in overflown
 endmodule

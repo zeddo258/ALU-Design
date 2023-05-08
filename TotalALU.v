@@ -46,7 +46,7 @@ wire [63:0] MulAns ;
 //============================
 
 ALUControl ALUControl( .clk(clk), .Signal(Signal), .SignaltoALU(SignaltoALU), .SignaltoSHT(SignaltoSHT), .SignaltoMULTU(SignaltoMULTU), .SignaltoMUX(SignaltoMUX) );
-assign binvert = ( SignaltoALU == SUB ) ? 1'b1 : 1'b0; 
+assign binvert = ( SignaltoALU == SUB || SignaltoALU == SLT ) ? 1'b1 : 1'b0; 
 alu_32bits ALU( .in0(dataA), .in1(dataB), .signal(SignaltoALU), .out(ALUOut), .reset(reset), .binvert(binvert) );
 MULTU MULTU1( .clk(clk), .dataA(dataA), .dataB(dataB), .Signal(SignaltoMULTU), .dataOut(MulAns), .reset(reset) );
 Shifter Shifter( .dataIn(dataA), .shamt(dataB), .signal(SignaltoSHT), .dataOut(ShifterOut), .reset(reset) );
